@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package src.proto.echo.models;
+option go_package = "github.com/purkhusid/bazel-bootstrap/src/proto/echo/models"; 
+
+
+message Request {
+    string message = 1;
+}
+
+message Response {
+    string message = 1;
+}

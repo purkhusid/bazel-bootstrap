@@ -1,0 +1,16 @@
+{
+    ////////
+    // Go
+    ////////
+    "go.useLanguageServer": true,
+    "go.vetOnSave": "package",
+    "go.buildOnSave": "package",
+    "gopls": {
+        "directoryFilters": [
+            "-",
+            "+src/go"
+        ],
+        "expandWorkspaceToModule": true,
+        "importShortcut": "Definition",
+    },
+}

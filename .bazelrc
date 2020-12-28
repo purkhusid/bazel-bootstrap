@@ -1,0 +1,51 @@
+###############################
+# Common settings
+# These settings will apply for all configs
+###############################
+# Add a workspace status command to be available for targets that support stamping
+# See: https://docs.bazel.build/versions/master/user-manual.html#workspace_status
+build --workspace_status_command=./tools/workspace_status.sh
+test --workspace_status_command=./tools/workspace_status.sh
+run --workspace_status_command=./tools/workspace_status.sh
+
+# Show timestamps in output
+build --show_timestamps
+test --show_timestamps
+query --show_timestamps
+
+# Strict deps for java deps
+run --experimental_strict_java_deps=error
+test --experimental_strict_java_deps=error
+build --experimental_strict_java_deps=error
+
+# Turn on --incompatible_strict_action_env which was on by default
+# in Bazel 0.21.0 but turned off again in 0.22.0. Follow
+# https://github.com/bazelbuild/bazel/issues/7026 for more details.
+# This flag is needed to so that the bazel cache is not invalidated
+# when running bazel via `yarn bazel`.
+# See https://github.com/angular/angular/issues/27514.
+build --incompatible_strict_action_env
+test --incompatible_strict_action_env
+run --incompatible_strict_action_env
+
+# Only show output from errors in test runs
+test --test_output=errors
+
+# Enable disk cache for local builds
+# This makes caching quicker when switching branches
+# See: https://docs.bazel.build/versions/master/remote-caching.html#disk-cache
+build --disk_cache=~/.cache/bazel-disk-cache
+test --disk_cache=~/.cache/bazel-disk-cache
+query --disk_cache=~/.cache/bazel-disk-cache
+build --repository_cache=~/.cache/bazel-repository-cache
+test --repository_cache=~/.cache/bazel-repository-cache
+query --repository_cache=~/.cache/bazel-repository-cache
+
+# Load any settings specific to the current user.
+# .bazelrc.user should appear in .gitignore so that settings are not shared with team members
+# This needs to be last statement in this
+# config, as the user configuration should be able to overwrite flags from this file.
+# See https://docs.bazel.build/versions/master/best-practices.html#bazelrc
+# (Note that we use .bazelrc.user so the file appears next to .bazelrc in directory listing,
+# rather than user.bazelrc as suggested in the Bazel docs)
+try-import %workspace%/.bazelrc.user
