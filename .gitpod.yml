@@ -1,5 +1,5 @@
 tasks:
-  - init: './bazel fetch'
+  - init: './bazel sync'
 
 vscode:
   extensions:
