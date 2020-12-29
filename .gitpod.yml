@@ -1,3 +1,6 @@
 tasks:
-  - init: 'echo "TODO: Replace with command to init project"'
-    command: 'echo "TODO: Replace with command to start project"'
+  - init: './bazel fetch'
+
+vscode:
+  extensions:
+    - golang.go@0.20.1:frBRCKviJpwMcADlv+zqrQ==
