@@ -1,5 +1,5 @@
 tasks:
-  - init: './bazel sync'
+  - init: './scripts/gitpod-init.sh'
 
 vscode:
   extensions:

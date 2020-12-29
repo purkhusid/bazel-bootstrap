@@ -1,2 +1,3 @@
 # Ignore symlinks that bazel creates
 /bazel-*
+.bazelrc.user
