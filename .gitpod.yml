@@ -1,9 +1,6 @@
-checkoutLocation: "monorepo"
-workspaceLocation: "."
-
 tasks:
   - init: './scripts/gitpod-init.sh'
-    prebuild: ./bazel build //... --config=remote
+    prebuild: ./bazel build //...
 
 vscode:
   extensions:
