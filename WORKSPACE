@@ -53,6 +53,47 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
+######################################################################
+# 3rdparty support for jvm
+# Support for 3rdparty libraries for JVM languages is provided by
+# rules_jvm_external: https://github.com/bazelbuild/rules_jvm_external
+#######################################################################
+rules_jvm_git_hash = "b38b5a46c4309041a039a9c1b611f74202025c34"
+
+http_archive(
+    name = "rules_jvm_external",
+    sha256 = "9269a84a81817eb8338d08a13c39511b44f26b2d1e62d5a62bf60dc79e1d3219",
+    strip_prefix = "rules_jvm_external-%s" % rules_jvm_git_hash,
+    type = "zip",
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % rules_jvm_git_hash,
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "io.grpc:grpc-api:1.24.0",
+        "io.grpc:grpc-core:1.24.0",
+        "io.grpc:grpc-netty:1.24.0",
+        "io.grpc:grpc-protobuf:1.24.0",
+        "io.grpc:grpc-stub:1.24.0",
+    ],
+    fetch_sources = True,
+    maven_install_json = "@monorepo//src:maven_install.json",
+    repositories = [
+        "https://jcenter.bintray.com/",
+        "http://uk.maven.org/maven2",
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+    strict_visibility = True,
+    version_conflict_policy = "pinned",
+)
+
+load("@maven//:defs.bzl", "pinned_maven_install")
+
+pinned_maven_install()
+
 #############################################################
 # Go
 # Go language support is provided with
@@ -95,7 +136,45 @@ load("//src/go:godeps_macro.bzl", "go_repositories")
 # gazelle:repository_macro src/go/godeps_macro.bzl%go_repositories
 go_repositories()
 
+###########################################
+# Scala
+# Scala language support is provided with
+# rules_scala: 
+###########################################
+rules_scala_version = "cdaccd5fe4e13791b3df5770ffaf6f16463fa5c5"
+
+http_archive(
+    name = "io_bazel_rules_scala",
+    sha256 = "b19603fabd7e7b2fa252146f6fe1c1e0c2761e8e036323a1795f36f35023d364",
+    strip_prefix = "rules_scala-%s" % rules_scala_version,
+    type = "zip",
+    url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip" % rules_scala_version,
+)
+
+# Stores Scala version and other configuration
+# 2.12 is a default version, other versions can be use by passing them explicitly:
+# scala_config(scala_version = "2.11.12")
+load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
+scala_config("2.12.10")
+
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
+scala_repositories()
+
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+scala_register_toolchains()
+
+# optional: setup ScalaTest toolchain and dependencies
+load("@io_bazel_rules_scala//testing:scalatest.bzl", "scalatest_repositories", "scalatest_toolchain")
+scalatest_repositories()
+scalatest_toolchain()
+
+load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_repositories")
+scala_proto_repositories()
+register_toolchains("//src/scala:scalapb_toolchain")
+
+######################################################
 # Set up Remote execution toolchain using BuildBuddy
+######################################################
 http_archive(
     name = "io_buildbuddy_buildbuddy_toolchain",
     sha256 = "9055a3e6f45773cd61931eba7b7cf35d6477ab6ad8fb2f18bf9815271fc682fe",

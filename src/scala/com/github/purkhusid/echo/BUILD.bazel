@@ -1,0 +1,17 @@
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library", "scala_binary")
+
+scala_library(
+    name = "main",
+    srcs = ["main.scala"],
+    deps = [
+        "//src/proto/echo/models:scala",
+        "//src/proto/echo/service:scala",
+        "@maven//:io_grpc_grpc_api"
+    ]
+)
+
+scala_binary(
+    name = "bin",
+    main_class = "com.github.purkhusid.echo.EchoService",
+    deps = [":main"],
+)

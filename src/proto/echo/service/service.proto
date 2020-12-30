@@ -4,7 +4,7 @@ import "src/proto/echo/models/models.proto";
 
 package src.proto.echo.service;
 option go_package = "github.com/purkhusid/bazel-bootstrap/src/proto/echo/service"; 
-
+option java_package = "com.github.purkhusid.proto.echo.service";
 
 service EchoService {
     rpc Echo (src.proto.echo.models.Request) returns (src.proto.echo.models.Response) {}
