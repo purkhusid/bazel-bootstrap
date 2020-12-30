@@ -27,7 +27,7 @@ class EchoService(executionContext: ExecutionContext) { self =>
     server = ServerBuilder.forPort(EchoService.port).addService(EchoServiceGrpc.bindService(new EchoServiceImpl, executionContext)).build.start
     EchoService.logger.info("Server started, listening on " + EchoService.port)
     sys.addShutdownHook {
-      System.err.println("*** shutting down gRPC server since JVM is shutting downn")
+      System.err.println("*** shutting down gRPC server since JVM is shutting down")
       self.stop()
       System.err.println("*** server shut down")
     }
