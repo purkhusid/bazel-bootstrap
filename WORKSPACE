@@ -78,6 +78,14 @@ maven_install(
         "io.grpc:grpc-protobuf:1.24.0",
         "io.grpc:grpc-stub:1.24.0",
     ],
+    # See: https://github.com/bazelbuild/rules_scala#usage-with-bazel-deps
+    override_targets = {
+        "org.scala-lang:scala-library": "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
+        "org.scala-lang:scala-reflect": "@io_bazel_rules_scala_scala_reflect//:io_bazel_rules_scala_scala_reflect",
+        "org.scala-lang:scala-compiler": "@io_bazel_rules_scala_scala_compiler//:io_bazel_rules_scala_scala_compiler",
+        "org.scala-lang.modules:scala-parser-combinators": "@io_bazel_rules_scala_scala_parser_combinators//:io_bazel_rules_scala_scala_parser_combinators",
+        "org.scala-lang.modules:scala-xml": "@io_bazel_rules_scala_scala_xml//:io_bazel_rules_scala_scala_xml",
+    },
     fetch_sources = True,
     maven_install_json = "@monorepo//src:maven_install.json",
     repositories = [
