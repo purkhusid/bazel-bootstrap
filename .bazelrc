@@ -97,8 +97,6 @@ build:remote --java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 build:remote --host_java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 build:remote --jobs=50
 build:remote --disk_cache=
-build:remote --strategy=Scalac=remote
-build:remote --noworker_sandboxing
 test:remote --remote_executor=grpcs://cloud.buildbuddy.io
 test:remote --host_platform=@buildbuddy_toolchain//:platform
 test:remote --platforms=@buildbuddy_toolchain//:platform
