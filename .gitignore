@@ -1,3 +1,8 @@
 # Ignore symlinks that bazel creates
 /bazel-*
+
+# Ignore the user specific bazelrc
 .bazelrc.user
+
+# Ignore node_modules
+src/typescript/node_modules

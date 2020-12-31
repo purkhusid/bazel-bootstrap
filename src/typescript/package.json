@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "@bazel/typescript": "3.0.0"
+  }
+}

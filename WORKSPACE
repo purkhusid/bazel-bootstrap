@@ -180,6 +180,53 @@ load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_reposito
 scala_proto_repositories()
 register_toolchains("//src/scala:scalapb_toolchain")
 
+####################################################################################################
+# NodeJS
+# Javascript/Typescript support is provided by
+# rules_nodejs for language support: https://github.com/bazelbuild/rules_nodejs
+# rules_typescript_proto for proto/gRPC support: https://github.com/Dig-Doug/rules_typescript_proto
+####################################################################################################
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "6142e9586162b179fdd570a55e50d1332e7d9c030efd853453438d607569721d",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.0.0/rules_nodejs-3.0.0.tar.gz"],
+)
+
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+
+node_repositories(package_json = ["//src/typescript:package.json"])
+
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+
+yarn_install(
+    name = "npm",
+    package_json = "//src/typescript:package.json",
+    yarn_lock = "//src/typescript:yarn.lock",
+)
+
+# TODO: Use upstream once https://github.com/Dig-Doug/rules_typescript_proto/pull/137 is accepted
+# http_archive(
+#     name = "rules_typescript_proto",
+#     sha256 = "8e16f3c3d2ed8abc8935b9d177f056d1920b70ac1aff94477aa9761362982123",
+#     strip_prefix = "rules_typescript_proto-1.0.0",
+#     urls = [
+#         "https://github.com/Dig-Doug/rules_typescript_proto/archive/1.0.0.tar.gz",
+#     ],
+# )
+http_archive(
+    name = "rules_typescript_proto",
+    # sha256 = "8e16f3c3d2ed8abc8935b9d177f056d1920b70ac1aff94477aa9761362982123",
+    strip_prefix = "rules_typescript_proto-d9a0ae6581d9ddd4a279d8bbf4d5ea1d15a74d6b",
+    urls = [
+        "https://github.com/purkhusid/rules_typescript_proto/archive/d9a0ae6581d9ddd4a279d8bbf4d5ea1d15a74d6b.tar.gz",
+    ],
+)
+
+load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
+
+rules_typescript_proto_dependencies()
+
+
 ######################################################
 # Set up Remote execution toolchain using BuildBuddy
 ######################################################
