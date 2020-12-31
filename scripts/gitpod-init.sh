@@ -14,3 +14,7 @@ cquery --remote_header=x-buildbuddy-api-key=${BUILDBUDDY_API_KEY}
 run --remote_header=x-buildbuddy-api-key=${BUILDBUDDY_API_KEY}
 EOT
 fi
+
+if [[ -n "${GITPOD_WORKSPACE_URL}" ]]; then
+    echo "startup --output_base=/workspace/bazel_output_base" >> .bazelrc.user
+fi
