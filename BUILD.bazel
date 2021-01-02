@@ -4,3 +4,9 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:build_file_name BUILD.bazel
 # gazelle:exclude src/typescript
 gazelle(name = "gazelle")
+
+alias(
+    name = "tsconfig.json",
+    actual = "//src/typescript:tsconfig.json",
+    visibility = ["//visibility:public"],
+)

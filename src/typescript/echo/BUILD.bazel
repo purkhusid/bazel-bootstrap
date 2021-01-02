@@ -1,0 +1,24 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+ts_library(
+    name = "main",
+    srcs = [
+        "main.ts",
+    ],
+    deps = [
+        "//src/proto/echo/models:typescript",
+        "//src/proto/echo/service:typescript",
+        "@npm//@grpc/grpc-js",
+    ],
+)
+
+nodejs_binary(
+    name = "bin",
+    data = [
+        ":main",
+        "@npm//google-protobuf",
+    ],
+    entry_point = ":main.ts",
+    templated_args = ["--bazel_patch_module_resolver"],
+)

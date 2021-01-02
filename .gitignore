@@ -6,3 +6,6 @@
 
 # Ignore node_modules
 src/typescript/node_modules
+
+# Ignore yarn error logs
+yarn-error.log

@@ -13,4 +13,10 @@
         "expandWorkspaceToModule": true,
         "importShortcut": "Definition",
     },
+    //////////////
+    // TypeScript
+    //////////////
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
 }

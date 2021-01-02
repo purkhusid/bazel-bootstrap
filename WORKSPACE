@@ -215,10 +215,10 @@ yarn_install(
 # )
 http_archive(
     name = "rules_typescript_proto",
-    # sha256 = "8e16f3c3d2ed8abc8935b9d177f056d1920b70ac1aff94477aa9761362982123",
-    strip_prefix = "rules_typescript_proto-d9a0ae6581d9ddd4a279d8bbf4d5ea1d15a74d6b",
+    sha256 = "d7a1b217866a67443b154007bfc2215a1621c92d9814475d917322809348950b",
+    strip_prefix = "rules_typescript_proto-78d642c610d2c4a440150b199496f9bb41ad7485",
     urls = [
-        "https://github.com/purkhusid/rules_typescript_proto/archive/d9a0ae6581d9ddd4a279d8bbf4d5ea1d15a74d6b.tar.gz",
+        "https://github.com/purkhusid/rules_typescript_proto/archive/78d642c610d2c4a440150b199496f9bb41ad7485.tar.gz",
     ],
 )
 

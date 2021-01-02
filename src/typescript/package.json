@@ -1,7 +1,8 @@
 {
   "private": true,
   "dependencies": {
-    
+    "@grpc/grpc-js": "1.2.2",
+    "google-protobuf": "3.14.0"
   },
   "devDependencies": {
     "@bazel/typescript": "3.0.0",

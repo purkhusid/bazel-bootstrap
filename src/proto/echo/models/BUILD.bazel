@@ -38,6 +38,7 @@ scala_proto_library(
 )
 
 typescript_proto_library(
-  name = "typescript",
-  proto = ":models_proto",
+    name = "typescript",
+    proto = ":models_proto",
+    visibility = ["//visibility:public"],
 )

@@ -41,7 +41,8 @@ scala_proto_library(
 )
 
 typescript_grpc_node_library(
-  name = "typescript",
-  proto = ":service_proto",
-  use_grpc_js = True,
+    name = "typescript",
+    proto = ":service_proto",
+    use_grpc_js = True,
+    visibility = ["//visibility:public"],
 )
