@@ -5,3 +5,6 @@ FROM gitpod/workspace-full
 # RUN brew install bastet
 #
 # More information: https://www.gitpod.io/docs/config-docker/
+
+# Install bazelisk so that it is available on the command line
+RUN npm install -g @bazel/bazelisk
