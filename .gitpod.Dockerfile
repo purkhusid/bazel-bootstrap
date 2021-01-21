@@ -19,6 +19,6 @@ RUN go get -u -v github.com/bazelbuild/buildtools/buildozer
 ENV GOPATH=/workspace/go
 
 # Install starlark LSP
-RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download/0.9.4/bzl && /
+RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download/0.9.4/bzl && \
   chmod +x $HOME/bin/gostarlark
   
