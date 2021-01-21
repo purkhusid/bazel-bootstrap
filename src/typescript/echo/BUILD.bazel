@@ -11,6 +11,7 @@ ts_library(
         "//src/proto/echo/service:typescript",
         "@npm//@grpc/grpc-js",
     ],
+    tags = ["no-remote-exec"],
 )
 
 nodejs_binary(
@@ -21,4 +22,5 @@ nodejs_binary(
     ],
     entry_point = ":main.ts",
     templated_args = ["--bazel_patch_module_resolver"],
+    tags = ["no-remote-exec"],
 )

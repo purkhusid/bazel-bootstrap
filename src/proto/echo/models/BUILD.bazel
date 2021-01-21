@@ -41,4 +41,5 @@ typescript_proto_library(
     name = "typescript",
     proto = ":models_proto",
     visibility = ["//visibility:public"],
+    tags = ["no-remote-exec"],
 )

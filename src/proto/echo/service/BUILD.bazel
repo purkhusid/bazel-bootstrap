@@ -45,4 +45,5 @@ typescript_grpc_node_library(
     proto = ":service_proto",
     use_grpc_js = True,
     visibility = ["//visibility:public"],
+    tags = ["no-remote-exec"],
 )
