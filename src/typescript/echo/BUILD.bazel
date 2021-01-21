@@ -6,12 +6,12 @@ ts_library(
     srcs = [
         "main.ts",
     ],
+    tags = ["no-remote-exec"],
     deps = [
         "//src/proto/echo/models:typescript",
         "//src/proto/echo/service:typescript",
         "@npm//@grpc/grpc-js",
     ],
-    tags = ["no-remote-exec"],
 )
 
 nodejs_binary(
@@ -21,6 +21,6 @@ nodejs_binary(
         "@npm//google-protobuf",
     ],
     entry_point = ":main.ts",
-    templated_args = ["--bazel_patch_module_resolver"],
     tags = ["no-remote-exec"],
+    templated_args = ["--bazel_patch_module_resolver"],
 )

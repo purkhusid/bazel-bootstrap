@@ -33,13 +33,13 @@ write_file(
 
 scala_proto_library(
     name = "scala",
-    deps = [":models_proto"],
     visibility = ["//visibility:public"],
+    deps = [":models_proto"],
 )
 
 typescript_proto_library(
     name = "typescript",
     proto = ":models_proto",
-    visibility = ["//visibility:public"],
     tags = ["no-remote-exec"],
+    visibility = ["//visibility:public"],
 )

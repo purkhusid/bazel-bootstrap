@@ -1,4 +1,4 @@
-load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library", "scala_binary")
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary", "scala_library")
 
 scala_library(
     name = "main",
@@ -6,8 +6,8 @@ scala_library(
     deps = [
         "//src/proto/echo/models:scala",
         "//src/proto/echo/service:scala",
-        "@maven//:io_grpc_grpc_api"
-    ]
+        "@maven//:io_grpc_grpc_api",
+    ],
 )
 
 scala_binary(

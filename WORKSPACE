@@ -35,13 +35,6 @@ versions.check(
     maximum_bazel_version = "4.0.0rc7",
 )
 
-#################################################################
-# Protobuf
-# The protobuf compiler
-# This is used by various language toolchains to build protobuf
-#################################################################
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
 http_archive(
     name = "com_google_protobuf",
     sha256 = "bf0e5070b4b99240183b29df78155eee335885e53a8af8683964579c214ad301",
@@ -78,6 +71,8 @@ maven_install(
         "io.grpc:grpc-protobuf:1.24.0",
         "io.grpc:grpc-stub:1.24.0",
     ],
+    fetch_sources = True,
+    maven_install_json = "@monorepo//src:maven_install.json",
     # See: https://github.com/bazelbuild/rules_scala#usage-with-bazel-deps
     override_targets = {
         "org.scala-lang:scala-library": "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library",
@@ -86,8 +81,6 @@ maven_install(
         "org.scala-lang.modules:scala-parser-combinators": "@io_bazel_rules_scala_scala_parser_combinators//:io_bazel_rules_scala_scala_parser_combinators",
         "org.scala-lang.modules:scala-xml": "@io_bazel_rules_scala_scala_xml//:io_bazel_rules_scala_scala_xml",
     },
-    fetch_sources = True,
-    maven_install_json = "@monorepo//src:maven_install.json",
     repositories = [
         "https://jcenter.bintray.com/",
         "http://uk.maven.org/maven2",
@@ -147,7 +140,7 @@ go_repositories()
 ###########################################
 # Scala
 # Scala language support is provided with
-# rules_scala: 
+# rules_scala:
 ###########################################
 rules_scala_version = "cdaccd5fe4e13791b3df5770ffaf6f16463fa5c5"
 
@@ -163,21 +156,28 @@ http_archive(
 # 2.12 is a default version, other versions can be use by passing them explicitly:
 # scala_config(scala_version = "2.11.12")
 load("@io_bazel_rules_scala//:scala_config.bzl", "scala_config")
+
 scala_config("2.12.10")
 
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
+
 scala_repositories()
 
 load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+
 scala_register_toolchains()
 
 # optional: setup ScalaTest toolchain and dependencies
 load("@io_bazel_rules_scala//testing:scalatest.bzl", "scalatest_repositories", "scalatest_toolchain")
+
 scalatest_repositories()
+
 scalatest_toolchain()
 
 load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_repositories")
+
 scala_proto_repositories()
+
 register_toolchains("//src/scala:scalapb_toolchain")
 
 ####################################################################################################
@@ -192,11 +192,9 @@ http_archive(
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.0.0/rules_nodejs-3.0.0.tar.gz"],
 )
 
-load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
 
 node_repositories(package_json = ["//src/typescript:package.json"])
-
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
 
 yarn_install(
     name = "npm",
@@ -216,7 +214,6 @@ http_archive(
 load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies")
 
 rules_typescript_proto_dependencies()
-
 
 ######################################################
 # Set up Remote execution toolchain using BuildBuddy

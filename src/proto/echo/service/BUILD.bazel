@@ -36,14 +36,14 @@ write_file(
 
 scala_proto_library(
     name = "scala",
-    deps = [":service_proto"],
     visibility = ["//visibility:public"],
+    deps = [":service_proto"],
 )
 
 typescript_grpc_node_library(
     name = "typescript",
     proto = ":service_proto",
+    tags = ["no-remote-exec"],
     use_grpc_js = True,
     visibility = ["//visibility:public"],
-    tags = ["no-remote-exec"],
 )
