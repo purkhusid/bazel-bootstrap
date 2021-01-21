@@ -8,3 +8,7 @@ FROM gitpod/workspace-full
 
 # Install bazelisk so that it is available on the command line
 RUN npm install -g @bazel/bazelisk
+
+# Install buildifier and buildozer
+RUN go get github.com/bazelbuild/buildtools/buildifier
+RUN go get github.com/bazelbuild/buildtools/buildozer
