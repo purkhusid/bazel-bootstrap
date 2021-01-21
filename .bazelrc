@@ -35,6 +35,11 @@ run --incompatible_strict_action_env
 # Only show output from errors in test runs
 test --test_output=errors
 
+# Set minimal downloading from remote caches
+build --remote_download_minimal
+test --remote_download_minimal
+run --remote_download_toplevel
+
 # Enable disk cache for local builds
 # This makes caching quicker when switching branches
 # See: https://docs.bazel.build/versions/master/remote-caching.html#disk-cache
