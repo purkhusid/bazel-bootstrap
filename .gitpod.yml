@@ -3,7 +3,7 @@ image:
 
 tasks:
   - init: "./scripts/gitpod-init.sh"
-    prebuild: ./bazel build //...
+    prebuild: bazel build //...
 
 vscode:
   extensions:

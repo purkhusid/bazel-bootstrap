@@ -10,7 +10,7 @@ FROM gitpod/workspace-full
 RUN npm install -g @bazel/bazelisk
 
 # Install buildifier and buildozer
-USER root
+ENV GOPATH=$HOME/go-packages
 RUN go get -u -v github.com/bazelbuild/buildtools/buildifier
 RUN go get -u -v github.com/bazelbuild/buildtools/buildozer
-USER gitpod
+ENV GOPATH=/workspace/go
