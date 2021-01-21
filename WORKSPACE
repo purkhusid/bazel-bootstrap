@@ -204,21 +204,12 @@ yarn_install(
     yarn_lock = "//src/typescript:yarn.lock",
 )
 
-# TODO: Use upstream once https://github.com/Dig-Doug/rules_typescript_proto/pull/137 is accepted
-# http_archive(
-#     name = "rules_typescript_proto",
-#     sha256 = "8e16f3c3d2ed8abc8935b9d177f056d1920b70ac1aff94477aa9761362982123",
-#     strip_prefix = "rules_typescript_proto-1.0.0",
-#     urls = [
-#         "https://github.com/Dig-Doug/rules_typescript_proto/archive/1.0.0.tar.gz",
-#     ],
-# )
 http_archive(
     name = "rules_typescript_proto",
-    sha256 = "d7a1b217866a67443b154007bfc2215a1621c92d9814475d917322809348950b",
-    strip_prefix = "rules_typescript_proto-78d642c610d2c4a440150b199496f9bb41ad7485",
+    sha256 = "aac6dec2c8d55da2b2c2689b7a2afe44b691555cab32e2eaa2bdd29627d950e9",
+    strip_prefix = "rules_typescript_proto-1.0.1",
     urls = [
-        "https://github.com/purkhusid/rules_typescript_proto/archive/78d642c610d2c4a440150b199496f9bb41ad7485.tar.gz",
+        "https://github.com/Dig-Doug/rules_typescript_proto/archive/1.0.1.tar.gz",
     ],
 )
 
