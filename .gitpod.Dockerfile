@@ -6,6 +6,9 @@ FROM gitpod/workspace-full
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
+# Create bin folder under $HOME for random binaries
+RUN mkdir $HOME/bin
+
 # Install bazelisk so that it is available on the command line
 RUN npm install -g @bazel/bazelisk
 
@@ -14,3 +17,8 @@ ENV GOPATH=$HOME/go-packages
 RUN go get -u -v github.com/bazelbuild/buildtools/buildifier
 RUN go get -u -v github.com/bazelbuild/buildtools/buildozer
 ENV GOPATH=/workspace/go
+
+# Install starlark LSP
+RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download/0.9.4/bzl && /
+  chmod +x $HOME/bin/gostarlark
+  

@@ -21,7 +21,7 @@
         "**/dist": true,
         "**/.cache": true,
         "**/node_modules": true
-    }, 
+    },
     // Files excluded for performance reasons
     "files.exclude": {
         "**/.git": true,
@@ -41,7 +41,6 @@
         "**/.cache": true,
         "**/node_modules": true
     },
-
     ////////
     // Go
     ////////
@@ -69,5 +68,6 @@
     // Bazel
     //////////////
     "bsv.buildifier.enabled": true,
-    "bsv.buildifier.executable": "buildifier"
+    "bsv.buildifier.executable": "/home/gitpod/go-packages/bin/buildifier",
+    "bsv.starlark.lsp.server.executable": "/home/gitpod/bin/gostarlark"
 }
