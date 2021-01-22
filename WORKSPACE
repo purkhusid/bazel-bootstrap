@@ -31,8 +31,8 @@ bazel_skylib_workspace()
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 versions.check(
-    minimum_bazel_version = "4.0.0rc7",
-    maximum_bazel_version = "4.0.0rc7",
+    minimum_bazel_version = "4.0.0",
+    maximum_bazel_version = "4.0.0",
 )
 
 http_archive(
