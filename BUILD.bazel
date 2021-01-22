@@ -1,4 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_rust//rust:rust.bzl", "rust_analyzer")
 
 # gazelle:prefix github.com/purkhusid/bazel-bootstrap
 # gazelle:build_file_name BUILD.bazel
@@ -8,5 +9,11 @@ gazelle(name = "gazelle")
 alias(
     name = "tsconfig.json",
     actual = "//src/typescript:tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+rust_analyzer(
+    name = "rust_analyzer",
+    targets = ["//src/rust/echo:main"],
     visibility = ["//visibility:public"],
 )

@@ -4,6 +4,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_library")
 load("@rules_typescript_proto//:index.bzl", "typescript_proto_library")
+load("@io_bazel_rules_rust//proto:proto.bzl", "rust_proto_library")
 
 proto_library(
     name = "models_proto",
@@ -42,4 +43,10 @@ typescript_proto_library(
     proto = ":models_proto",
     tags = ["no-remote-exec"],
     visibility = ["//visibility:public"],
+)
+
+rust_proto_library(
+    name = "src_proto_echo_models",
+    visibility = ["//visibility:public"],
+    deps = [":models_proto"],
 )

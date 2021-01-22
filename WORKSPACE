@@ -220,6 +220,32 @@ load("@rules_typescript_proto//:index.bzl", "rules_typescript_proto_dependencies
 
 rules_typescript_proto_dependencies()
 
+#######################################################
+# Rust
+# Rust support is provided by
+# rules_rust for language support: https://github.com/bazelbuild/rules_rust
+# cargo-raze for 3rdparty dependencies: https://github.com/google/cargo-raze
+#######################################################
+# NOTE: Using this fork until https://github.com/bazelbuild/rules_rust/pull/505 has been merged
+http_archive(
+    name = "io_bazel_rules_rust",
+    sha256 = "0281a8240c8ac0d831da08addcdb22f47a22ddc2f22a4dc1c8fddd71f2195386",
+    strip_prefix = "rules_rust-a0df8c5d9cfa128a98b6bd84fa187b36b04f6a62",
+    urls = [
+        "https://github.com/djmarcin/rules_rust/archive/a0df8c5d9cfa128a98b6bd84fa187b36b04f6a62.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
+load("@io_bazel_rules_rust//proto:repositories.bzl", "rust_proto_repositories")
+
+rust_repositories()
+rust_proto_repositories()
+
+load("//src/rust/cargo:crates.bzl", "raze_fetch_remote_crates")
+
+raze_fetch_remote_crates()
+
 ######################################################
 # Set up Remote execution toolchain using BuildBuddy
 ######################################################

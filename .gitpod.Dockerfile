@@ -23,4 +23,7 @@ ENV GOPATH=/workspace/go
 # Install starlark LSP
 RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download/0.9.4/bzl && \
   chmod +x $HOME/bin/gostarlark
+
+# Install cargo-raze for Rust 3rdparty dependencies
+RUN cargo install cargo-raze
   

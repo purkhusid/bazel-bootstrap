@@ -11,6 +11,7 @@ vscode:
     - dbaeumer.vscode-eslint
     - stackbuild.bazel-stack-vscode@0.6.6:FOc2NvIOE1KFex75j2AbNA==
     - scala-lang.scala
+    - matklad.rust-analyzer
 
 github:
   prebuilds:

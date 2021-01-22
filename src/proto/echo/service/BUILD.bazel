@@ -4,6 +4,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 load("@io_bazel_rules_scala//scala_proto:scala_proto.bzl", "scala_proto_library")
 load("@rules_typescript_proto//:index.bzl", "typescript_grpc_node_library")
+load("@io_bazel_rules_rust//proto:proto.bzl", "rust_grpc_library")
 
 proto_library(
     name = "service_proto",
@@ -45,5 +46,11 @@ typescript_grpc_node_library(
     proto = ":service_proto",
     tags = ["no-remote-exec"],
     use_grpc_js = True,
+    visibility = ["//visibility:public"],
+)
+
+rust_grpc_library(
+    name = "src_proto_echo_service",
+    deps = [":service_proto"],
     visibility = ["//visibility:public"],
 )

@@ -12,3 +12,7 @@ yarn-error.log
 
 # Ignore Scala metals
 .metals
+
+# Ignore rust analyzer project
+rust-project.json
+
