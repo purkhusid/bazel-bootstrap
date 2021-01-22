@@ -10,6 +10,7 @@ vscode:
     - golang.go@0.20.1:frBRCKviJpwMcADlv+zqrQ==
     - dbaeumer.vscode-eslint
     - stackbuild.bazel-stack-vscode@0.6.6:FOc2NvIOE1KFex75j2AbNA==
+    - scala-lang.scala
 
 github:
   prebuilds:

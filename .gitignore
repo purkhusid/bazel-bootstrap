@@ -9,3 +9,6 @@ src/typescript/node_modules
 
 # Ignore yarn error logs
 yarn-error.log
+
+# Ignore Scala metals
+.metals
