@@ -17,7 +17,7 @@ impl EchoService for EchoImpl {
         let mut r = Response::new();
         info!("YAY");
         let message = if req.get_message().is_empty() { "wat" } else { req.get_message() };
-        r.set_message(message.tost());
+        r.set_message(message.to_string());
         grpc::SingleResponse::completed(r)
     }
 }
