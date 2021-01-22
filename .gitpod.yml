@@ -8,7 +8,7 @@ tasks:
 vscode:
   extensions:
     - golang.go@0.20.1:frBRCKviJpwMcADlv+zqrQ==
-    - dbaeumer.vscode-eslint@2.1.14:YDCg1YnVJIMuZM40rzK8PA==
+    - dbaeumer.vscode-eslint
     - stackbuild.bazel-stack-vscode@0.6.6:FOc2NvIOE1KFex75j2AbNA==
 
 github:
