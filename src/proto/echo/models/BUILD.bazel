@@ -41,7 +41,6 @@ scala_proto_library(
 typescript_proto_library(
     name = "typescript",
     proto = ":models_proto",
-    tags = ["no-remote-exec"],
     visibility = ["//visibility:public"],
 )
 
