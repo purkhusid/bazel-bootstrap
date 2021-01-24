@@ -13,9 +13,11 @@ build --show_timestamps
 test --show_timestamps
 query --show_timestamps
 
-# Scala persistent worker
+# Persistent worker for Scala
 build --strategy=Scalac=worker
 build --worker_sandboxing
+test --strategy=Scalac=worker
+test --worker_sandboxing
 
 # Strict deps for java deps
 run --experimental_strict_java_deps=error
@@ -98,6 +100,8 @@ build:remote --host_java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 build:remote --jobs=50
 build:remote --disk_cache=
 build:remote --remote_download_minimal
+build:remote --noworker_sandboxing
+build:remote --strategy=Scalac=remote
 test:remote --remote_download_minimal
 test:remote --remote_executor=grpcs://cloud.buildbuddy.io
 test:remote --host_platform=@buildbuddy_toolchain//:platform
@@ -111,6 +115,8 @@ test:remote --java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 test:remote --host_java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 test:remote --jobs=50
 test:remote --disk_cache=
+test:remote --noworker_sandboxing
+test:remote --strategy=Scalac=remote
 
 # Load any settings specific to the current user.
 # .bazelrc.user should appear in .gitignore so that settings are not shared with team members

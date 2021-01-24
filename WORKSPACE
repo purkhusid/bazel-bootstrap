@@ -147,11 +147,11 @@ go_repositories()
 # Scala language support is provided with
 # rules_scala:
 ###########################################
-rules_scala_version = "cdaccd5fe4e13791b3df5770ffaf6f16463fa5c5"
+rules_scala_version = "939fa4cb85654d212d3649060215afb95f3f6dbd"
 
 http_archive(
     name = "io_bazel_rules_scala",
-    sha256 = "b19603fabd7e7b2fa252146f6fe1c1e0c2761e8e036323a1795f36f35023d364",
+    sha256 = "4afe9e13af5f867584a51f51f1c18065ca4a6611165df3312e41e711865591ca",
     strip_prefix = "rules_scala-%s" % rules_scala_version,
     type = "zip",
     url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip" % rules_scala_version,
