@@ -6,32 +6,25 @@ languages built with [Bazel](https://bazel.build)
 All the programming languages implement the same gRPC service if the tooling
 supports gRPC. Otherwise the language will implement a simple http web service.
 
-# Prerequisites
+## Developing using Gitpod
 
-TODO: List all prereqs and why they are needed
+The repository has been set up to work well with Gitpod. To start developing
+using gitpod you can do the following:
 
-## Building and testing
+1. Log into Gitpod: https://gitpod.io
+2. Enable VS Code under settings at https://gitpod.io/settings
+3. Open the repository using Gitpod by going to: https://gitpod.io/#https://github.com/purkhusid/bazel-bootstrap
 
-All the code in the repository is built and tested using Bazel. Bazel is
-bootstrapped using [bazelisk](https://github.com/bazelbuild/bazelisk) which is
-included the the repository as `./bazel`.
+By using Gitpod you get an ready to use development environment with the
+correct plugins set up for each programming language
 
-You can therefore build and test the whole repository by running
+### Using remote execution
 
-```
-./bazel test //...
-```
+The repository is also ready for remote execution via [BuildBuddy](https://buildbuddy.io)
+All you have to do is follow these steps:
 
-## Supported languages
-
-### Go
-
-TODO: Explain setup
-
-## IDE Setup
-TODO: Set up Gitpod
-
-
-## Interesting stuff to look at
-
-* grpc-web
+1. Create an account at BuildBuddy: https://app.buildbuddy.io
+2. Create an BuildBuddy API key under https://app.buildbuddy.io/settings/
+3. Create a environment variable called `BUILDBUDDY_API_KEY` under your [gitpod settings](https://gitpod.io/settings) with the API key you got in the previous step
+4. [Open this repository using Gitpod](https://gitpod.io/#https://github.com/purkhusid/bazel-bootstrap)
+5. Run bazel using `--config=remote` e.g. `bazel build --config=remote //...`
