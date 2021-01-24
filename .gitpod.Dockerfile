@@ -27,3 +27,7 @@ RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download
 # Install cargo-raze for Rust 3rdparty dependencies
 RUN cargo install cargo-raze
   
+# Add Bazel command line completion
+USER root
+COPY scripts/bazel-complete.bash /etc/bash_completion.d/bazel-complete.bash
+USER gitpod
