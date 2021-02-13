@@ -15,4 +15,4 @@ yarn-error.log
 
 # Ignore rust analyzer project
 rust-project.json
-
+target
