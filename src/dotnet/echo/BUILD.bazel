@@ -1,0 +1,13 @@
+load("@io_bazel_rules_dotnet//dotnet:defs.bzl", "fsharp_binary")
+
+fsharp_binary(
+    name = "main.exe",
+    srcs = ["main.fs"],
+    deps = [
+        "//src/proto/echo/service:csharp.dll",
+        "@core_sdk_stdlib//:libraryset",
+        "@google.protobuf//:lib",
+        "@grpc.core.api//:lib",
+        "@grpc.core//:lib",
+    ],
+)

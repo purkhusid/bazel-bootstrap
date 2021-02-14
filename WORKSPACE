@@ -241,11 +241,66 @@ load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
 load("@io_bazel_rules_rust//proto:repositories.bzl", "rust_proto_repositories")
 
 rust_repositories()
+
 rust_proto_repositories()
 
 load("//src/rust/cargo:crates.bzl", "raze_fetch_remote_crates")
 
 raze_fetch_remote_crates()
+
+#######################################################
+# .Net
+# .Net support is provided by
+# rules_dotnet for language support: https://github.com/bazelbuild/rules_dotnet
+# cargo-raze for 3rdparty dependencies: https://github.com/google/cargo-raze
+#######################################################
+http_archive(
+    name = "io_bazel_rules_dotnet",
+    sha256 = "56747c022b8dd6b1bf960ae6239478535b2de44a531e8290e25059f375d0b341",
+    strip_prefix = "rules_dotnet-312dfb42f1e55dd7cbc5da0d1958de302b9643d1",
+    urls = [
+        "https://github.com/bazelbuild/rules_dotnet/archive/312dfb42f1e55dd7cbc5da0d1958de302b9643d1.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_dotnet//dotnet:deps.bzl", "dotnet_repositories")
+
+dotnet_repositories()
+
+load("@io_bazel_rules_dotnet//dotnet:defs.bzl", "dotnet_register_toolchains", "dotnet_repositories_nugets")
+
+dotnet_register_toolchains()
+
+dotnet_repositories_nugets()
+
+load("//src/dotnet/nuget:nuget.bzl", "nuget_packages")
+
+nuget_packages()
+
+#################################################################################################################
+# Protobuf/gRPC support for various languages that don't have builtin support
+# NOTE: using fork until this PR has been merged: https://github.com/rules-proto-grpc/rules_proto_grpc/pull/110
+#################################################################################################################
+http_archive(
+    name = "rules_proto_grpc",
+    sha256 = "9b94ef020b1eb3f5d4b1f1b141aa03ae4f232fa1c6f671c7d2d5b16ac7f1e088",
+    strip_prefix = "rules_proto_grpc-b48fadd805d47235237e91659d765a4e37dc79a9",
+    urls = ["https://github.com/purkhusid/rules_proto_grpc/archive/b48fadd805d47235237e91659d765a4e37dc79a9.tar.gz"],
+)
+
+load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
+
+rules_proto_grpc_toolchains()
+
+rules_proto_grpc_repos()
+
+load("@rules_proto_grpc//csharp:repositories.bzl", rules_proto_grpc_csharp_repos="csharp_repos")
+
+rules_proto_grpc_csharp_repos()
+
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+
+grpc_deps()
 
 ######################################################
 # Set up Remote execution toolchain using BuildBuddy

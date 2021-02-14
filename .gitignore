@@ -16,3 +16,6 @@ yarn-error.log
 # Ignore rust analyzer project
 rust-project.json
 target
+
+# Ignore nuget2bazel cache
+src/dotnet/nuget/packages

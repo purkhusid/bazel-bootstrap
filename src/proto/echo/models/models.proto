@@ -3,6 +3,7 @@ syntax = "proto3";
 package src.proto.echo.models;
 option go_package = "github.com/purkhusid/bazel-bootstrap/src/proto/echo/models"; 
 option java_package = "com.github.purkhusid.proto.echo.models";
+option csharp_namespace = "Src.Proto.Echo.Models";
 
 message Request {
     string message = 1;
