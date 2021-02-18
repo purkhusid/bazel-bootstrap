@@ -1,5 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
-load("@io_bazel_rules_rust//rust:rust.bzl", "rust_analyzer")
+load("@rules_rust//rust:rust.bzl", "rust_analyzer")
 
 # gazelle:prefix github.com/purkhusid/bazel-bootstrap
 # gazelle:build_file_name BUILD.bazel

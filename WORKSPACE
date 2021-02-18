@@ -229,16 +229,16 @@ rules_typescript_proto_dependencies()
 #######################################################
 # NOTE: Using this fork until https://github.com/bazelbuild/rules_rust/pull/505 has been merged
 http_archive(
-    name = "io_bazel_rules_rust",
-    sha256 = "0281a8240c8ac0d831da08addcdb22f47a22ddc2f22a4dc1c8fddd71f2195386",
-    strip_prefix = "rules_rust-a0df8c5d9cfa128a98b6bd84fa187b36b04f6a62",
+    name = "rules_rust",
+    sha256 = "0f55b4b69fd9bc1dbcc038e75ec54bd97fa00ddc6cfbc6278fc288dafc98b7f8",
+    strip_prefix = "rules_rust-fee3b3c658c3d2f49c20c1b12e55063bf7a7f693",
     urls = [
-        "https://github.com/djmarcin/rules_rust/archive/a0df8c5d9cfa128a98b6bd84fa187b36b04f6a62.tar.gz",
+        "https://github.com/bazelbuild/rules_rust/archive/fee3b3c658c3d2f49c20c1b12e55063bf7a7f693.tar.gz",
     ],
 )
 
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
-load("@io_bazel_rules_rust//proto:repositories.bzl", "rust_proto_repositories")
+load("@rules_rust//rust:repositories.bzl", "rust_repositories")
+load("@rules_rust//proto:repositories.bzl", "rust_proto_repositories")
 
 rust_repositories()
 
@@ -247,6 +247,9 @@ rust_proto_repositories()
 load("//src/rust/cargo:crates.bzl", "raze_fetch_remote_crates")
 
 raze_fetch_remote_crates()
+
+load("@rules_rust//tools/rust_analyzer/raze:crates.bzl", "rules_rust_tools_rust_analyzer_fetch_remote_crates")
+rules_rust_tools_rust_analyzer_fetch_remote_crates()
 
 #######################################################
 # .Net

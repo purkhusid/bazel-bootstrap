@@ -10,7 +10,7 @@ path = "fake_lib.rs"
 log = "=0.3.6"
 
 [package.metadata.raze]
-rust_rules_workspace_name = "io_bazel_rules_rust"
+rust_rules_workspace_name = "rules_rust"
 
 # The path at which to write output files.
 #

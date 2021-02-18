@@ -1,14 +1,14 @@
-extern crate src_proto_echo_service;
 extern crate grpc;
-extern crate tls_api_stub;
 extern crate log;
+extern crate src_proto_echo_service;
+extern crate tls_api_stub;
 
-use std::thread;
 use std::env;
 use std::str::FromStr;
+use std::thread;
 
-use src_proto_echo_service::*;
 use log::*;
+use src_proto_echo_service::*;
 
 struct EchoImpl;
 
@@ -16,7 +16,11 @@ impl EchoService for EchoImpl {
     fn echo(&self, _m: grpc::RequestOptions, req: Request) -> grpc::SingleResponse<Response> {
         let mut r = Response::new();
         info!("YAY");
-        let message = if req.get_message().is_empty() { "wat" } else { req.get_message() };
+        let message = if req.get_message().is_empty() {
+            "wat"
+        } else {
+            req.get_message()
+        };
         r.set_message(message.to_string());
         grpc::SingleResponse::completed(r)
     }
