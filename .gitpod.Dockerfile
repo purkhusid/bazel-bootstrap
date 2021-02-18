@@ -26,6 +26,7 @@ RUN wget -O $HOME/bin/gostarlark https://github.com/stackb/bzl/releases/download
 
 # Install cargo-raze for Rust 3rdparty dependencies
 RUN cargo install cargo-raze
+RUN rustup component add rustfmt
   
 # Add Bazel command line completion
 USER root
