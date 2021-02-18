@@ -69,5 +69,9 @@
     //////////////
     "bsv.buildifier.enabled": true,
     "bsv.buildifier.executable": "/home/gitpod/go-packages/bin/buildifier",
-    "bsv.starlark.lsp.server.executable": "/home/gitpod/bin/gostarlark"
+    "bsv.starlark.lsp.server.executable": "/home/gitpod/bin/gostarlark",
+    /////////////
+    // Rust
+    ////////////
+    "rust-analyzer.updates.askBeforeDownload": false
 }
