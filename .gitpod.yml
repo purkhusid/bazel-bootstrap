@@ -7,9 +7,9 @@ tasks:
 
 vscode:
   extensions:
-    - golang.go@0.20.1:frBRCKviJpwMcADlv+zqrQ==
+    - golang.go
     - dbaeumer.vscode-eslint
-    - stackbuild.bazel-stack-vscode@0.6.6:FOc2NvIOE1KFex75j2AbNA==
+    - stackbuild.bazel-stack-vscode
     - scala-lang.scala
     - matklad.rust-analyzer
 
