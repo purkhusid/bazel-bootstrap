@@ -259,10 +259,10 @@ rules_rust_tools_rust_analyzer_fetch_remote_crates()
 #######################################################
 http_archive(
     name = "io_bazel_rules_dotnet",
-    sha256 = "56747c022b8dd6b1bf960ae6239478535b2de44a531e8290e25059f375d0b341",
-    strip_prefix = "rules_dotnet-312dfb42f1e55dd7cbc5da0d1958de302b9643d1",
+    sha256 = "0fe9640d9d55bd5c7ff34b8ef2257430d9d4ffc87e94e5711cbe6032d8dd6749",
+    strip_prefix = "rules_dotnet-72ca6d2ccbf085ebfbf80187f2231d6f1b2ea656",
     urls = [
-        "https://github.com/bazelbuild/rules_dotnet/archive/312dfb42f1e55dd7cbc5da0d1958de302b9643d1.tar.gz",
+        "https://github.com/bazelbuild/rules_dotnet/archive/72ca6d2ccbf085ebfbf80187f2231d6f1b2ea656.tar.gz",
     ],
 )
 
