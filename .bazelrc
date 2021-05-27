@@ -43,6 +43,10 @@ run --incompatible_strict_action_env
 # Only show output from errors in test runs
 test --test_output=errors
 
+# Used by rust_analyzer
+build --repo_env=RULES_RUST_TOOLCHAIN_INCLUDE_RUSTC_SRCS=true
+test --repo_env=RULES_RUST_TOOLCHAIN_INCLUDE_RUSTC_SRCS=true
+
 # Enable disk cache for local builds
 # This makes caching quicker when switching branches
 # See: https://docs.bazel.build/versions/master/remote-caching.html#disk-cache
@@ -65,12 +69,12 @@ build --bes_results_url=https://app.buildbuddy.io/invocation/
 build --bes_backend=grpcs://cloud.buildbuddy.io
 build --remote_cache=grpcs://cloud.buildbuddy.io
 build --remote_timeout=3600
-build --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
+#build --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
 test --bes_results_url=https://app.buildbuddy.io/invocation/
 test --bes_backend=grpcs://cloud.buildbuddy.io
 test --remote_cache=grpcs://cloud.buildbuddy.io
 test --remote_timeout=3600
-test --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
+#test --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
 query --bes_results_url=https://app.buildbuddy.io/invocation/
 query --bes_backend=grpcs://cloud.buildbuddy.io
 query --remote_cache=grpcs://cloud.buildbuddy.io
@@ -80,17 +84,17 @@ aquery --bes_results_url=https://app.buildbuddy.io/invocation/
 aquery --bes_backend=grpcs://cloud.buildbuddy.io
 aquery --remote_cache=grpcs://cloud.buildbuddy.io
 aquery --remote_timeout=3600
-aquery --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
+#aquery --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
 cquery --bes_results_url=https://app.buildbuddy.io/invocation/
 cquery --bes_backend=grpcs://cloud.buildbuddy.io
 cquery --remote_cache=grpcs://cloud.buildbuddy.io
 cquery --remote_timeout=3600
-cquery --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
+#cquery --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
 run --bes_results_url=https://app.buildbuddy.io/invocation/
 run --bes_backend=grpcs://cloud.buildbuddy.io
 run --remote_cache=grpcs://cloud.buildbuddy.io
 run --remote_timeout=3600
-run --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
+#run --experimental_remote_downloader=grpcs://cloud.buildbuddy.io
 
 # Set up remote execution config via BuildBuddy
 build:remote --remote_executor=grpcs://cloud.buildbuddy.io
@@ -103,7 +107,7 @@ build:remote --javabase=@buildbuddy_toolchain//:javabase_jdk8
 build:remote --host_javabase=@buildbuddy_toolchain//:javabase_jdk8
 build:remote --java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 build:remote --host_java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
-build:remote --jobs=50
+build:remote --jobs=100
 build:remote --disk_cache=
 build:remote --remote_download_minimal
 build:remote --noworker_sandboxing
@@ -119,7 +123,7 @@ test:remote --javabase=@buildbuddy_toolchain//:javabase_jdk8
 test:remote --host_javabase=@buildbuddy_toolchain//:javabase_jdk8
 test:remote --java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
 test:remote --host_java_toolchain=@buildbuddy_toolchain//:toolchain_jdk8
-test:remote --jobs=50
+test:remote --jobs=100
 test:remote --disk_cache=
 test:remote --noworker_sandboxing
 test:remote --strategy=Scalac=remote

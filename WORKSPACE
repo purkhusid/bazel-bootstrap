@@ -28,13 +28,6 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
 
-load("@bazel_skylib//lib:versions.bzl", "versions")
-
-versions.check(
-    minimum_bazel_version = "4.0.0",
-    maximum_bazel_version = "4.0.0",
-)
-
 http_archive(
     name = "rules_proto",
     sha256 = "8e7d59a5b12b233be5652e3d29f42fba01c7cbab09f6b3a8d0a57ed6d1e9a0da",
@@ -56,19 +49,20 @@ rules_proto_toolchains()
 # Support for 3rdparty libraries for JVM languages is provided by
 # rules_jvm_external: https://github.com/bazelbuild/rules_jvm_external
 #######################################################################
-rules_jvm_git_hash = "b38b5a46c4309041a039a9c1b611f74202025c34"
+RULES_JVM_EXTERNAL_TAG = "4.1"
+RULES_JVM_EXTERNAL_SHA = "f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140"
 
 http_archive(
     name = "rules_jvm_external",
-    sha256 = "9269a84a81817eb8338d08a13c39511b44f26b2d1e62d5a62bf60dc79e1d3219",
-    strip_prefix = "rules_jvm_external-%s" % rules_jvm_git_hash,
-    type = "zip",
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % rules_jvm_git_hash,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
+    fail_if_repin_required = True,
     artifacts = [
         "io.grpc:grpc-api:1.24.0",
         "io.grpc:grpc-core:1.24.0",
@@ -112,19 +106,17 @@ pinned_maven_install()
 #############################################################
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "7904dbecbaffd068651916dce77ff3437679f9d20e1a7956bff43826e7645fcc",
+    sha256 = "69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.25.1/rules_go-v0.25.1.tar.gz",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.25.1/rules_go-v0.25.1.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.27.0/rules_go-v0.27.0.tar.gz",
     ],
 )
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "222e49f034ca7a1d1231422cdb67066b885819885c356673cb1f72f748a3c9d4",
+    sha256 = "62ca106be173579c0a167deb23358fdfe71ffa1e4cfdddf5582af26520f1c66f",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.22.3/bazel-gazelle-v0.22.3.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.23.0/bazel-gazelle-v0.23.0.tar.gz",
     ],
 )
 
@@ -133,7 +125,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.15.5")
+go_register_toolchains(version = "1.16.2")
 
 gazelle_dependencies()
 
@@ -147,11 +139,11 @@ go_repositories()
 # Scala language support is provided with
 # rules_scala:
 ###########################################
-rules_scala_version = "939fa4cb85654d212d3649060215afb95f3f6dbd"
+rules_scala_version = "c9cc7c261d3d740eb91ef8ef048b7cd2229d12ec"
 
 http_archive(
     name = "io_bazel_rules_scala",
-    sha256 = "4afe9e13af5f867584a51f51f1c18065ca4a6611165df3312e41e711865591ca",
+    sha256 = "8887906c9698a63f7ebf30498050fee695d7fdc70b0ee084fece549cbe922159",
     strip_prefix = "rules_scala-%s" % rules_scala_version,
     type = "zip",
     url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip" % rules_scala_version,
@@ -193,8 +185,8 @@ register_toolchains("//src/scala:scalapb_toolchain")
 ####################################################################################################
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "6142e9586162b179fdd570a55e50d1332e7d9c030efd853453438d607569721d",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.0.0/rules_nodejs-3.0.0.tar.gz"],
+    sha256 = "4a5d654a4ccd4a4c24eca5d319d85a88a650edf119601550c95bf400c8cc897e",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.5.1/rules_nodejs-3.5.1.tar.gz"],
 )
 
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
@@ -207,13 +199,12 @@ yarn_install(
     yarn_lock = "//src/typescript:yarn.lock",
 )
 
-# NOTE: Using fork until https://github.com/Dig-Doug/rules_typescript_proto/pull/140 is merged
 http_archive(
     name = "rules_typescript_proto",
-    # sha256 = "aac6dec2c8d55da2b2c2689b7a2afe44b691555cab32e2eaa2bdd29627d950e9",
-    strip_prefix = "rules_typescript_proto-47cd22cc6b7ec7e53b7a77970714b1af07f79449",
+    sha256 = "6675ca265f2948a585cea9bac75be1eb983b3e23a64d715915759918ae9e4260",
+    strip_prefix = "rules_typescript_proto-96a4ae2ad0eb9770e9d71ae29d34d5b871719a96",
     urls = [
-        "https://github.com/purkhusid/rules_typescript_proto/archive/47cd22cc6b7ec7e53b7a77970714b1af07f79449.tar.gz",
+        "https://github.com/Dig-Doug/rules_typescript_proto/archive/96a4ae2ad0eb9770e9d71ae29d34d5b871719a96.tar.gz",
     ],
 )
 
@@ -230,17 +221,17 @@ rules_typescript_proto_dependencies()
 # NOTE: Using this fork until https://github.com/bazelbuild/rules_rust/pull/505 has been merged
 http_archive(
     name = "rules_rust",
-    sha256 = "0f55b4b69fd9bc1dbcc038e75ec54bd97fa00ddc6cfbc6278fc288dafc98b7f8",
-    strip_prefix = "rules_rust-fee3b3c658c3d2f49c20c1b12e55063bf7a7f693",
+    sha256 = "fdafd94c2161e028c8d258d276d26372a45428b1f023f6dcfd1dd831cd5bd18d",
+    strip_prefix = "rules_rust-7458499d76cd7622171e1fe248a254f89cdefc1f",
     urls = [
-        "https://github.com/bazelbuild/rules_rust/archive/fee3b3c658c3d2f49c20c1b12e55063bf7a7f693.tar.gz",
+        "https://github.com/bazelbuild/rules_rust/archive/7458499d76cd7622171e1fe248a254f89cdefc1f.tar.gz",
     ],
 )
 
 load("@rules_rust//rust:repositories.bzl", "rust_repositories")
 load("@rules_rust//proto:repositories.bzl", "rust_proto_repositories")
 
-rust_repositories()
+rust_repositories(version = "1.52.0", edition="2018", rustfmt_version = "1.52.0", include_rustc_srcs = True)
 
 rust_proto_repositories()
 
@@ -248,8 +239,9 @@ load("//src/rust/cargo:crates.bzl", "raze_fetch_remote_crates")
 
 raze_fetch_remote_crates()
 
-load("@rules_rust//tools/rust_analyzer/raze:crates.bzl", "rules_rust_tools_rust_analyzer_fetch_remote_crates")
-rules_rust_tools_rust_analyzer_fetch_remote_crates()
+load("@rules_rust//tools/rust_analyzer:deps.bzl", "rust_analyzer_deps")
+
+rust_analyzer_deps()
 
 #######################################################
 # .Net
@@ -259,10 +251,10 @@ rules_rust_tools_rust_analyzer_fetch_remote_crates()
 #######################################################
 http_archive(
     name = "io_bazel_rules_dotnet",
-    sha256 = "0fe9640d9d55bd5c7ff34b8ef2257430d9d4ffc87e94e5711cbe6032d8dd6749",
-    strip_prefix = "rules_dotnet-72ca6d2ccbf085ebfbf80187f2231d6f1b2ea656",
+    sha256 = "33b35e13e8d41f8a44e88af79734e691219f392655141b83ae38238d7692d8e1",
+    strip_prefix = "rules_dotnet-64ad7481bae1052ed775c3642e4fa146c5a4cdd1",
     urls = [
-        "https://github.com/bazelbuild/rules_dotnet/archive/72ca6d2ccbf085ebfbf80187f2231d6f1b2ea656.tar.gz",
+        "https://github.com/bazelbuild/rules_dotnet/archive/64ad7481bae1052ed775c3642e4fa146c5a4cdd1.tar.gz",
     ],
 )
 
@@ -286,9 +278,9 @@ nuget_packages()
 #################################################################################################################
 http_archive(
     name = "rules_proto_grpc",
-    sha256 = "9b94ef020b1eb3f5d4b1f1b141aa03ae4f232fa1c6f671c7d2d5b16ac7f1e088",
-    strip_prefix = "rules_proto_grpc-b48fadd805d47235237e91659d765a4e37dc79a9",
-    urls = ["https://github.com/purkhusid/rules_proto_grpc/archive/b48fadd805d47235237e91659d765a4e37dc79a9.tar.gz"],
+    sha256 = "a67a399b8607511874b0b893371ea05524345d8a55b698571baa2477f16433e1",
+    strip_prefix = "rules_proto_grpc-e118d854158cf59897259b7dd44522929ec64d2b",
+    urls = ["https://github.com/rules-proto-grpc/rules_proto_grpc/archive/e118d854158cf59897259b7dd44522929ec64d2b.tar.gz"],
 )
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
@@ -301,6 +293,10 @@ load("@rules_proto_grpc//csharp:repositories.bzl", rules_proto_grpc_csharp_repos
 
 rules_proto_grpc_csharp_repos()
 
+load("@rules_proto_grpc//fsharp:repositories.bzl", rules_proto_grpc_fsharp_repos="fsharp_repos")
+
+rules_proto_grpc_fsharp_repos()
+
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
 grpc_deps()
@@ -310,9 +306,9 @@ grpc_deps()
 ######################################################
 http_archive(
     name = "io_buildbuddy_buildbuddy_toolchain",
-    sha256 = "9055a3e6f45773cd61931eba7b7cf35d6477ab6ad8fb2f18bf9815271fc682fe",
-    strip_prefix = "buildbuddy-toolchain-52aa5d2cc6c9ba7ee4063de35987be7d1b75f8e2",
-    urls = ["https://github.com/buildbuddy-io/buildbuddy-toolchain/archive/52aa5d2cc6c9ba7ee4063de35987be7d1b75f8e2.tar.gz"],
+    sha256 = "a2a5cccec251211e2221b1587af2ce43c36d32a42f5d881737db3b546a536510",
+    strip_prefix = "buildbuddy-toolchain-829c8a574f706de5c96c54ca310f139f4acda7dd",
+    urls = ["https://github.com/buildbuddy-io/buildbuddy-toolchain/archive/829c8a574f706de5c96c54ca310f139f4acda7dd.tar.gz"],
 )
 
 load("@io_buildbuddy_buildbuddy_toolchain//:deps.bzl", "buildbuddy_deps")
