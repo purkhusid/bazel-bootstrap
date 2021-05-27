@@ -11,9 +11,7 @@ supports gRPC. Otherwise the language will implement a simple http web service.
 The repository has been set up to work well with Gitpod. To start developing
 using gitpod you can do the following:
 
-1. Log into Gitpod: https://gitpod.io
-2. Enable VS Code under settings at https://gitpod.io/settings
-3. Open the repository using Gitpod by going to: https://gitpod.io/#https://github.com/purkhusid/bazel-bootstrap
+1. Open the repository using Gitpod by going to: https://gitpod.io/#https://github.com/purkhusid/bazel-bootstrap
 
 By using Gitpod you get an ready to use development environment with the
 correct plugins set up for each programming language
