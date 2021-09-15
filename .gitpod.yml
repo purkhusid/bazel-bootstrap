@@ -2,16 +2,20 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: "./scripts/gitpod-init.sh"
-    prebuild: bazel build //...
+  - name: Prepare Bazel
+    before: "./scripts/gitpod-init.sh"
+    init: bazel build //...
 
 vscode:
   extensions:
-    - golang.go
-    - dbaeumer.vscode-eslint
-    - stackbuild.bazel-stack-vscode
-    - scala-lang.scala
-    - matklad.rust-analyzer
+    - golang.go@0.27.2 # Frequently updated on Open VSX
+    - dbaeumer.vscode-eslint@2.1.8 # Not frequently updated on Open VSX
+    - BazelBuild.vscode-bazel@0.4.1 # Frequently updated on VSX
+    - scalameta.metals@1.10.9 # Frequently updated on VSX
+    - matklad.rust-analyzer@0.2.735 # Frequently updated on VSX
+    - Ionide.Ionide-fsharp@5.7.3 # Frequently updated on VSX
+    - muhammad-sammy.csharp@1.23.15 # Frequently updated on VSX
+    - zxh404.vscode-proto3@0.5.4 # Frequently updated on VSX
 
 github:
   prebuilds:
